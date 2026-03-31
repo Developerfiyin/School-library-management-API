@@ -5,5 +5,9 @@ const authorSchema = new Schema({
         type: String,
         required: true,
     },
-    bio : String
-});
+
+    bio : String,
+
+}, {timestamps: true});
+
+
