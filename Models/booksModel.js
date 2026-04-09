@@ -20,8 +20,16 @@ const ModelSchema = new Schema({
         borrowedBy : {type: Mongoose.Schema.Types.ObjectId, "ref" : "student"},
         issuedBy : { type: Mongoose.Schema.Types.ObjectId, "ref" : "librarian"}, 
    
-    returnDate: {type: Date, default: null},
+       returnDate: {type: Date, default: null},
      
+
+
+
+
+
+
+
+       
 
 }, {timestamps: true});
 
