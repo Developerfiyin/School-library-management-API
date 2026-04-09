@@ -14,8 +14,10 @@ const ModelSchema = new Schema({
 
     authors : [{
         type: Mongoose.Schema.Types.ObjectId,
-        status: {type: String}
+        status: {type: String, enum: ["IN", "OUT"], default: "IN"},
+        borrowedBy : {type: Mongoose.Schema.Types.ObjectId}
     }]
+
 
 }, {timestamps: true});
 
