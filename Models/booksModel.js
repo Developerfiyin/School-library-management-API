@@ -13,10 +13,14 @@ const ModelSchema = new Schema({
 
 
     authors : [{
-        type: Mongoose.Schema.Types.ObjectId,
+        type: Mongoose.Schema.Types.ObjectId, "ref" : "author" }],
         status: {type: String, enum: ["IN", "OUT"], default: "IN"},
-        borrowedBy : {type: Mongoose.Schema.Types.ObjectId}
-    }]
+        
+
+        borrowedBy : {type: Mongoose.Schema.Types.ObjectId, "ref" : "student"},
+        issuedBy : { type: Mongoose.Schema.Types.ObjectId, "ref" : "librarian"}, 
+   
+
 
 
 }, {timestamps: true});
