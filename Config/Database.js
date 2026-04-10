@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 const URL = process.env.MONGODB_URI;
 
-async function connectDB ( ) {
+async function connectDB () {
     await mongoose.connect(URL);
-    console.log("Davsal is here with me on a whatsapp call !!!!!");
-    
-
+    console.log("MongoDB connected successfully!");
 }
 
+
+
+console.log("Jude Ani is here!!!!!!!!!")
+console.log(" DAVSAL IS SLEEPING!. ")
 export default connectDB;
 

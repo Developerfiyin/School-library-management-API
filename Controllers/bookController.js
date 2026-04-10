@@ -10,7 +10,6 @@ export const borrowBook = async (req, res) => {
         return res.status(404).json({ message: "Book not found" });
     }
 
-
     if (book.status === "OUT") {
         return res.status(400).json ({message: "OOPSS!!, the book out  already!. Please try again later"});
     }
@@ -21,6 +20,7 @@ export const borrowBook = async (req, res) => {
     book.returnDate = returnDate;
 
     await book.save();
+
     res.status(200).json({ message: "Book borrowed successfully", book });
     }
     catch (error) {
