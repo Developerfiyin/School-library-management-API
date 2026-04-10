@@ -11,16 +11,21 @@ app.get("/", (req, res) => {
 });
 const startDb = async () => {
  
-  try {
-    
-  } catch (error) {
-    
-  }
+try {
   await connectDB();
 
-    app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+  app.listen(3000, () => {
+   console.log("Server is running on http://localhost:3000");
 });
+
+console.log("Jude ikechukwu is here!!!!!!!!!")
+
+} catch (error) {
+    console.error("Failed to connect to the database:", error);
+}
+ 
+
+
 
 }
 
