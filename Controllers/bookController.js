@@ -11,11 +11,20 @@ exports.borrowedBooks = async (req, res) => {
     }
 
 
-    if (book.Status === "OUT") {
+    if (book.status === "OUT") {
         return res.status(400).json ({message: "OOPs!!, the book out  already!. Please try again later"});
     }
+
+    book.status = "OUT";
+    book.borrowedBy = StudentId;
+    book.issuedBy = LibrarianId;
+    book.returnDate = returnDate;
+
+    await book.save();
+    res.status(200).json({ message: "Book borrowed successfully", book });
+
     }
     catch (error) {
-
+   res.status(500).json({ message: "An error occurred while borrowing the book", error: error.message });
     }
 }
