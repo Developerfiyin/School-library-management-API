@@ -7,8 +7,7 @@ async function connectDB () {
 }
 
 
-
 console.log("Jude Ani is here!!!!!!!!!")
-console.log(" DAVSAL IS SLEEPING!. ")
+console.log(" SALAMI DAVID OLLUWATOBIOLA a.k.a  DAVSAL IS SLEEPING!. ")
 export default connectDB;
 
