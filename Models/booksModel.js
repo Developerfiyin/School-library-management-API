@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
+
 const { Schema } = mongoose;
+
 const ModelSchema = new Schema({
    title: {
         type: String,
