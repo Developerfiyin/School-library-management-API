@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const { Schema } = mongoose;
 
 const ModelSchema = new Schema({
@@ -14,15 +13,15 @@ const ModelSchema = new Schema({
     },
 
 
-    authors : [{
-        type: Mongoose.Schema.Types.ObjectId, "ref" : "author" }],
-        status: {type: String, enum: ["IN", "OUT"], default: "IN"},
+    authors : [{ type: Mongoose.Schema.Types.ObjectId, "ref" : "author" }],
+
+    status: {type: String, enum: ["IN", "OUT"], default: "IN"},
         
 
-        borrowedBy : {type: Mongoose.Schema.Types.ObjectId, "ref" : "student"},
-        issuedBy : { type: Mongoose.Schema.Types.ObjectId, "ref" : "librarian"}, 
+    borrowedBy : {type: Mongoose.Schema.Types.ObjectId, "ref" : "student", default: null},
+    issuedBy : { type: Mongoose.Schema.Types.ObjectId, "ref" : "librarian", default : null}, 
    
-       returnDate: {type: Date, default: null},
+    returnDate: {type: Date, default: null},
      
 
 

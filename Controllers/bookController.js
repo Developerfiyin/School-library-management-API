@@ -1,10 +1,26 @@
 import books from "../Models/booksModel.js";
 
+
+
 export const borrowBook = async (req, res) => {
     try {
    const {returnDate, StudentId, LibrarianId} = req.body;
-   const bookId = req.params.id;
+    if (!StudentId) {
+        return res.status(400).json ({message: "Student id required"});
+    }
+
+     if (!returnDate) {
+        return res.status(400).json ({message: "return date required"});
+    }
+
+     if (!LibrarianId) {
+        return res.status(400).json ({message: "Librariran id  required"});
+    }
+    
+   const bookId = req.params.id; 
     const book = await books.findById(bookId);
+
+ 
 
     if(!book) {
         return res.status(404).json({ message: "Book not found" });
@@ -14,8 +30,13 @@ export const borrowBook = async (req, res) => {
         return res.status(400).json ({message: "OOPSS!!, the book out  already!. Please try again later"});
     }
 
+    
+
+
     book.status = "OUT";
+    
     book.borrowedBy = StudentId;
+   
     book.issuedBy = LibrarianId;
     book.returnDate = returnDate;
 
