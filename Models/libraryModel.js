@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const {Schema} from moongose;
+const {Schema} = mongoose;
 
 const librarySchema = new Schema({
     name: {
