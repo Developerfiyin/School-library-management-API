@@ -4,8 +4,8 @@ import books from "../Models/booksModel.js";
 
 export const borrowBook = async (req, res) => {
     try {
-   const {returnDate, StudentId, LibrarianId} = req.body;
-    if (!StudentId) {
+   const {returnDate, studentId, librarianId} = req.body;
+    if (!studentId) {
         return res.status(400).json ({message: "Student id required"});
     }
 
@@ -13,8 +13,8 @@ export const borrowBook = async (req, res) => {
         return res.status(400).json ({message: "return date required"});
     }
 
-     if (!LibrarianId) {
-        return res.status(400).json ({message: "Librariran id  required"});
+     if (!librarianId) {
+        return res.status(400).json ({message: "Librarian id  required"});
     }
     
    const bookId = req.params.id; 
@@ -35,9 +35,9 @@ export const borrowBook = async (req, res) => {
 
     book.status = "OUT";
     
-    book.borrowedBy = StudentId;
+    book.borrowedBy = studentId;
    
-    book.issuedBy = LibrarianId;
+    book.issuedBy = librarianId;
     book.returnDate = returnDate;
 
     await book.save();
