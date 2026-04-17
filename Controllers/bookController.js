@@ -47,4 +47,9 @@ export const borrowBook = async (req, res) => {
     catch (error) {
    res.status(500).json({ message: "An error occurred while borrowing the book", error: error.message });
     }
+
+
+const createBook = async (req, res) => {
+
+await books.create(req.body);
 }
