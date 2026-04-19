@@ -1,7 +1,10 @@
 import express from 'express'
-import { createBook } from '../Controllers/bookController.js';
+
 const router = express.Router();
 
-router.get(" /books", createBook);
+router.get("/books", (req, res) => {
+    // Handle GET request for all books
+});
 
+router.post("/books/:id", createBook);
 export default router;

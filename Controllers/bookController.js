@@ -31,12 +31,17 @@ export const borrowBook = async (req, res) => {
     }
 
     
+  const  createBook  = async  (req, res) => {
+    const id = req.params.id;
+    const {title, author, isbn} = req.body;
+    const newBook = {id, title, author, isbn, status: "AVAILABLE"};
+    books.push(newBook);
+    res.status(201).json({message: "Book created successfully", book: newBook});
+}
 
 
     book.status = "OUT";
-    
     book.borrowedBy = studentId;
-   
     book.issuedBy = librarianId;
     book.returnDate = returnDate;
 
@@ -49,7 +54,4 @@ export const borrowBook = async (req, res) => {
     }
 
 
-const createBook = async (req, res) => {
-
-await books.create(req.body);
-}
+export default borrowBook;
