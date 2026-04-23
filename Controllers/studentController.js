@@ -1,3 +1,4 @@
+import Student from "../Models/studentModel";
 
 export const createStudent = async (req, res) => {
   const { name, email } = req.body;
@@ -25,3 +26,7 @@ export const createStudent = async (req, res) => {
     console.log(err.message);
   }
 };
+
+export const getBoks= async (req, res) => {
+    
+}

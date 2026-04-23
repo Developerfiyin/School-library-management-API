@@ -7,4 +7,5 @@ router.get("/books", (req, res) => {
 });
 
 router.post("/books/:id", createBook);
+router.get("/books", )
 export default router;

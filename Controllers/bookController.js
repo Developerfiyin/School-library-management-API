@@ -54,4 +54,4 @@ export const borrowBook = async (req, res) => {
     }
 
 
-export default borrowBook;
+export  default borrowController
