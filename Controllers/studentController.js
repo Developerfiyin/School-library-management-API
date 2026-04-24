@@ -28,5 +28,10 @@ export const createStudent = async (req, res) => {
 };
 
 export const getBoks= async (req, res) => {
-    
+    try {
+        const id = req.params.id
+        
+    } catch (error) {
+        
+    }
 }
