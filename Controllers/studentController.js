@@ -27,11 +27,26 @@ export const createStudent = async (req, res) => {
   }
 };
 
-export const getBoks= async (req, res) => {
+export const getBooks= async (req, res) => {
     try {
         const id = req.params.id
         
     } catch (error) {
         
     }
+}
+
+
+export const getBooks = async (req, res) => {
+   try {
+    const students = await Student.find().sort({ name: 1 });
+    res
+      .status(200)
+      .json({ ok: true, message: "Request successful", data: students });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ ok: false, error: { message: "cannot fetch students" } });
+    console.error(err.message);
+  }
 }
