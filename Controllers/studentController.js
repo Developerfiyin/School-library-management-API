@@ -50,3 +50,15 @@ export const getBooks = async (req, res) => {
     console.error(err.message);
   }
 }
+
+
+export const getBooksById = async (req, res) => {
+try {
+  const id = req.params.id;
+  const {} = req.body
+
+} catch (error) {
+  
+}
+
+}
