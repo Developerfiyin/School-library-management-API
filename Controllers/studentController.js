@@ -10,7 +10,7 @@ export const createStudent = async (req, res) => {
     const newStudent = await Student.create({
       name,
       email,
-     // studentId: studentIdGen,
+      // studentId: studentIdGen,
     });
 
     res.status(201).json({
@@ -27,18 +27,8 @@ export const createStudent = async (req, res) => {
   }
 };
 
-export const getBooks= async (req, res) => {
-    try {
-        const id = req.params.id
-        
-    } catch (error) {
-        
-    }
-}
-
-
 export const getBooks = async (req, res) => {
-   try {
+  try {
     const students = await Student.find().sort({ name: 1 });
     res
       .status(200)
@@ -49,16 +39,13 @@ export const getBooks = async (req, res) => {
       .json({ ok: false, error: { message: "cannot fetch students" } });
     console.error(err.message);
   }
-}
-
+};
 
 export const getBooksById = async (req, res) => {
-try {
   const id = req.params.id;
-  const {} = req.body
 
-} catch (error) {
-  
-}
-
-}
+  try {
+    res.status(200)
+    .json({message: "Request Sucessfull",  data: id})
+  } catch (error) {}
+};
