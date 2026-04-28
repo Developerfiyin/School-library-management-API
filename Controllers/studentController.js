@@ -45,7 +45,12 @@ export const getBooksById = async (req, res) => {
   const id = req.params.id;
 
   try {
-    res.status(200)
-    .json({message: "Request Sucessfull",  data: id})
-  } catch (error) {}
+const students = await Student.findById(id);
+if(!students) {
+  return res.status(400).json({message: "Invalid Input!! Fill the field correctly", data: null})
+}
+    res.status(200).json({ message: "Request Sucessfull", data: students });
+  } catch (error) { 
+    res.status(500).json({ok: false, error: {message: "cannot fetch student with the given id"}})
+  }
 };
