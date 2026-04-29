@@ -36,3 +36,19 @@ export const getAuthorById = async (req, res) => {
         res.status(500).json({ ok: false, message: "Error fetching author" })
     }
 }
+
+
+// DELETE AUTHORS
+
+export const deleteAuthors = async (req, res) => {
+    const author = req.author
+try {
+    const deletedAuthor = await author.remove()
+    res.status(200).json({ ok: true, message: "Author deleted successfully", data: deletedAuthor }) 
+
+} catch (error) {
+    res.status(500).json({ ok: false, message: "Error deleting author" })
+    console.error(error.message)
+    
+}
+}
