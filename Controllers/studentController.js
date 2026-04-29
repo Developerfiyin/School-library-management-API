@@ -27,7 +27,7 @@ export const createStudent = async (req, res) => {
   }
 };
 
-export const getBooks = async (req, res) => {
+export const getStudents = async (req, res) => {
   try {
     const students = await Student.find().sort({ name: 1 });
     res
@@ -41,7 +41,7 @@ export const getBooks = async (req, res) => {
   }
 };
 
-export const getBooksById = async (req, res) => {
+export const getStudentsById = async (req, res) => {
   const id = req.params.id;
 
   try {

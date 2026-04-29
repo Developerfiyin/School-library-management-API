@@ -1,6 +1,7 @@
 import express from "express";
 
-import studentController from "../Controllers/studentController";
+
+import {createStudent,getStudent, getStudentsById} from "../Controllers/studentController";
 
 const router = express.Router();
 
@@ -8,17 +9,9 @@ const router = express.Router();
 
 router.post("/students", (req, res) => {
     const { name, email } = req.body;
-
-
-
-
-    if (!name || !email) {
-        return res.status(400).json({ message : "Name and email are required"});
-    }
-
-    return res.status(201).json({ message: "Student created successfully", student: { name, email } });
-    
 })
 
-
+router.post("/students", createStudent);
+router.get("/students", getStudent);
+router.get("/students/:id", getStudentsById);
 
