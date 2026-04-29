@@ -1,8 +1,9 @@
 import express from 'express'
 import authorSchema from "../Models/authorModel"
 
+//CREATE AUTHOR
 export const createAuthor = async (req, res) => {
- 
+
     try {
         const author = await authorSchema.create(req.body)
         res.status(201).json({ ok: true , message: "Author has been created successfully", data: author })
@@ -11,5 +12,13 @@ export const createAuthor = async (req, res) => {
     }
 }
 
+//GET ALL AUTHORS
 
+export const getAuthors = () => {
+ try {
+    const authors = await author
+ } catch (error) {
+    
+ }
+}
 

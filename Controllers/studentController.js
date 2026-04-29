@@ -1,5 +1,7 @@
 import Student from "../Models/studentModel";
 
+//CREATE STUDENT 
+
 export const createStudent = async (req, res) => {
   const { name, email } = req.body;
   try {
@@ -27,6 +29,8 @@ export const createStudent = async (req, res) => {
   }
 };
 
+//GET ALL STUDENTS
+
 export const getStudents = async (req, res) => {
   try {
     const students = await Student.find().sort({ name: 1 });
@@ -40,6 +44,8 @@ export const getStudents = async (req, res) => {
     console.error(err.message);
   }
 };
+
+//GET STUDENTS BY ID
 
 export const getStudentsById = async (req, res) => {
   const id = req.params.id;
