@@ -42,6 +42,7 @@ export const getAuthorById = async (req, res) => {
 
 export const deleteAuthors = async (req, res) => {
     const author = req.author
+    
 try {
     const deletedAuthor = await Author.remove()
     res.status(200).json({ ok: true, message: "Author deleted successfully", data: deletedAuthor }) 

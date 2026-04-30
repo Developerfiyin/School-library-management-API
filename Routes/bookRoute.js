@@ -1,5 +1,6 @@
 import express from 'express'
 import bookController from "../Controllers/bookController";
+import { get } from 'mongoose';
 
 const router = express.Router();
 
@@ -8,5 +9,11 @@ router.get("/books", (req, res) => {
 });
 
 router.post("/books/:id", createBook);
-router.get("/books", )
+router.get("/books", getBooks);
+router.get("/books/:id", getBookById);
+router.put("/books/:id", updateBook);
+router.delete("/books/:id", deleteBook);
+router.post("/books/:id/borrow", borrowBook);
+
+
 export default router;
