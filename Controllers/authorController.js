@@ -1,11 +1,11 @@
 import express from 'express'
-import authorSchema from "../Models/authorModel"
+import Author from '../Models/authorModel'
 
 //CREATE AUTHOR
 export const createAuthor = async (req, res) => {
 
     try {
-        const author = await authorSchema.create(req.body)
+        const author = await Author.create(req.body)
         res.status(201).json({ ok: true , message: "Author has been created successfully", data: author })
     } catch (error) {
         res.status(500).json({ ok: false, message: "Error  creating author" })
@@ -16,7 +16,7 @@ export const createAuthor = async (req, res) => {
 
 export const getAuthors = async (req, res) => {
  try {
-    const authors = await authorSchema.find().sort({ name: 1 })
+    const authors = await Author.find().sort({ name: 1 })
     res.status(200).json({ ok: true, message: "Request successful", data: authors })
  } catch (error) {
     res.status(500).json({ ok: false, message: "Error fetching authors" })
@@ -27,7 +27,7 @@ export const getAuthors = async (req, res) => {
 export const getAuthorById = async (req, res) => {
     const id = req.params.id
     try {
-        const author = await authorSchema.findById(id)
+        const author = await Author.findById(id)
         if (!author) {
             return res.status(400).json({ ok: false, message: "Invalid Input!! Fill the field correctly", data: null })
         }
@@ -43,7 +43,7 @@ export const getAuthorById = async (req, res) => {
 export const deleteAuthors = async (req, res) => {
     const author = req.author
 try {
-    const deletedAuthor = await author.remove()
+    const deletedAuthor = await Author.remove()
     res.status(200).json({ ok: true, message: "Author deleted successfully", data: deletedAuthor }) 
 
 } catch (error) {
