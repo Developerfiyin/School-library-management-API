@@ -1,5 +1,6 @@
 import express from "express";
 import books from "../Models/booksModel.js";
+import BookModel from "../Models/booksModel.js";
 
 
 
@@ -53,6 +54,20 @@ export const borrowBook = async (req, res) => {
     catch (error) {
    res.status(500).json({ message: "An error occurred while borrowing the book", error: error.message });
     }
+}
 
+// GET ALL BOOKS
+export  const getBooks = async (req, res)  => {
 
+    try {
+       const AllBooks = await BookModel.find().sort({title: 1})
+       res.status(200).json({ok:true, message: "REQUEST SUCCESSFULL", data : AllBooks})
+
+       if(!AllBooks) {
+        return res.status(400).json({ok: false, message: "Missing Input, Book Required"})
+       }
+    } catch (error) {
+        res.status(500).json({ok: false, error: error.message})
+        
+    }
 }
