@@ -89,3 +89,22 @@ export const getBooksById = async (req, res) =>  {
         res.status(500).json({ok: false, error: error.message})
     }
 }
+
+//UPDATE BOOK BY ID 
+
+export const updateBook = async (req, res ) => {
+const id = req.params.id;
+const {title, author, isbn} = req.body;
+try {
+  const updateBook =   await BookModel.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body },
+    { new: true }
+  )
+  res.status(200).json({ok: true, message: "Book updated successfully", data: updateBook})
+} catch (error) {
+  res.status(500).json({ok: false, error: error.message})
+}
+}
+
+
