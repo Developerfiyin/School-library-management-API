@@ -71,3 +71,21 @@ export  const getBooks = async (req, res)  => {
         
     }
 }
+
+
+// GET BOOK BY ID
+
+
+export const getBooksById = async (req, res) =>  {
+    const id = req.params.id;
+    try {
+       const book = await  BookModel.findById(id)
+         if (!book) {
+            return res.status(400).json({ok: false, message: "Invalid Input!! Fill the field correctly", data: null })
+        }
+        res.status(200).json({ok: true, message: "Request successful", data: book})
+
+    } catch (error) {
+        res.status(500).json({ok: false, error: error.message})
+    }
+}
