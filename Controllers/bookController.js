@@ -107,4 +107,19 @@ try {
 }
 }
 
+//DELETE BOOK BY ID
 
+export const deleteBook = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const deleteBook = await BookModel.findByIdAndDelete(id)
+        if (!deleteBook) {
+            return res.status(400).json({ok: false, message: "Invalid Input!! Fill the field correctly", data: null })
+        }
+        res.status(200).json({ok: true, message: "Book deleted successfully", data: deleteBook})
+}
+
+    catch (error) {
+        res.status(500).json({ok: false, error: error.message})
+    }
+}
