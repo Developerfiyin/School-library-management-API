@@ -56,11 +56,11 @@ export const getStudentsById = async (req, res) => {
       return res
         .status(400)
         .json({
+          ok: false,
           message: "Invalid Input!! Fill the field correctly",
-          data: null,
         });
     }
-    res.status(200).json({ message: "Request Sucessfull", data: students });
+    res.status(200).json({ ok: true, message: "Request Sucessfull", data: students });
   } catch (error) {
     res
       .status(500)
