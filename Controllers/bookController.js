@@ -9,7 +9,7 @@ export const borrowBook = async (req, res) => {
       return res.status(400).json({ message: "Student id required" });
     }
 
-    if (!returnDate) {
+    if (!returnDate) { 
       return res.status(400).json({ message: "return date required" });
     }
 
