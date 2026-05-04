@@ -4,6 +4,16 @@ import Student from "../Models/studentModel";
 
 export const createStudent = async (req, res) => {
   const { name, email } = req.body;
+if (!name || typeof name !== "string" || !name.trim()) { 
+  
+  res.status(400).json({ok: false, message: "Fill in your name correctly!"})
+}
+
+  if (!email || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    res.status(400).json({ ok: false, message: "Please provide a valid email address" });
+    return;
+    
+  }
   try {
     const count = await Student.countDocuments();
 
