@@ -3,17 +3,17 @@ import Student from "../Models/studentModel";
 //CREATE STUDENT 
 
 export const createStudent = async (req, res) => {
-  const { name, email } = req.body;
+  const { name } = req.body;
 if (!name || typeof name !== "string" || !name.trim()) { 
   
   res.status(400).json({ok: false, message: "Fill in your name correctly!"})
 }
 
-  if (!email || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    res.status(400).json({ ok: false, message: "Please provide a valid email address" });
-    return;
+  // if (!email || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  //   res.status(400).json({ ok: false, message: "Please provide a valid email address" });
+  //   return;
     
-  }
+  // }
   try {
     const count = await Student.countDocuments();
 
@@ -76,7 +76,7 @@ export const getStudentsById = async (req, res) => {
       .status(500)
       .json({
         ok: false,
-        error: { message: "cannot fetch student with the given id" },
+        message: {ok: false, message: "cannot fetch student with the given id" },
       });
     console.error(error.message);
   }
