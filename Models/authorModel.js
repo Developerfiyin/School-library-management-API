@@ -4,9 +4,13 @@ const authorSchema = new Schema({
     name: {
         type: String,
         required: true,
+        trim: true
     },
 
-    bio : String,
+    bio : {
+        type: String,
+        trim: true
+    }
 
 }, {timestamps: true});
 

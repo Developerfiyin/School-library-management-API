@@ -3,6 +3,8 @@ import BookModel from "../Models/booksModel.js";
 
 export const borrowBook = async (req, res) => {
   try {
+
+
     const { returnDate, studentId, librarianId } = req.body;
     if (!studentId) {
       return res.status(400).json({ message: "Student id required" });
@@ -30,6 +32,27 @@ export const borrowBook = async (req, res) => {
           message: "OOPSS!!, the book out  already!. Please try again later",
         });
     }
+
+    // const bookData = {
+    //   status: "OUT",
+    //   borrowedBy: req.student._id,
+    //   issuedBy: req.attendant._id,
+    //   returnDate,
+    // };
+    // const borrowedBook = await req.book.set(bookData).save();
+
+    // await borrowedBook.populate([
+    //   { path: "authors", select: "name bio" },
+    //   { path: "borrowedBy", select: "name email" },
+    //   { path: "issuedBy", select: "name staffId" },
+    // ]);
+
+    // res.status(200).json({
+    //   ok: true,
+    //   message: "your request to borrow this book is successful",
+    //   data: borrowedBook,
+    // });
+
 
     const createBook = async (req, res) => {
       const id = req.params.id;

@@ -5,11 +5,14 @@ const ModelSchema = new Schema({
    title: {
         type: String,
         required: true,
+        trim
     },
 
     isbn : {
         type: String,
         required: true,
+        unique: true,
+        trim: true
     },
 
 
