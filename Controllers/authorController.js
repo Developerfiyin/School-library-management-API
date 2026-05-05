@@ -38,9 +38,30 @@ export const getAuthorById = async (req, res) => {
     }
 }
 
+//Update Author
+export const updateAuthor = async (req, res) => {
+
+try {
+        const author = req.author;
+        const {name, bio} = req.body;
+        await author.set({ name, bio }).save()
+        res.status(200).json({ ok: true, message: "Author updated successfully", data: author })
+    } catch (error) {
+        res.status(500).json({ ok: false, message: "Error updating author" })
+        console.log(error.message);
+    }
+
+} 
+catch (error) {
+    res.status(500).json({ ok: false, message: error.message });
+    console.log(error.message);
+    
+}
+
+
 //UPDATE AUTHOR BY ID
 
-export const updateAuthor = async (req, res) => {
+export const updateAuthorById = async (req, res) => {
     const id = req.params.id;
     const {name, bio} = req.body;
     if (!name || !bio) {

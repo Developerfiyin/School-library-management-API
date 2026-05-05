@@ -3,6 +3,9 @@ import {
   getAuthorById,
   getAuthors,
   createAuthor,
+  updateAuthor,
+  deleteAuthor,
+  updateAuthorById,
 } from "../Controllers/authorController";
 const router = express.Router();
 
