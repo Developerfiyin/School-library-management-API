@@ -29,25 +29,25 @@ export const borrowBook = async (req, res) => {
       });
     }
 
-    // const bookData = {
-    //   status: "OUT",
-    //   borrowedBy: req.student._id,
-    //   issuedBy: req.attendant._id,
-    //   returnDate,
-    // };
-    // const borrowedBook = await req.book.set(bookData).save();
+    const bookData = {
+      status: "OUT",
+      borrowedBy: studentId,
+      issuedBy: librarianId,
+      returnDate,
+    };
+    const borrowedBook = await req.book.set(bookData).save();
 
-    // await borrowedBook.populate([
-    //   { path: "authors", select: "name bio" },
-    //   { path: "borrowedBy", select: "name email" },
-    //   { path: "issuedBy", select: "name staffId" },
-    // ]);
+    await borrowedBook.populate([
+      { path: "authors", select: "name bio" },
+      { path: "borrowedBy", select: "name email" },
+      { path: "issuedBy", select: "name staffId" },
+    ]);
 
-    // res.status(200).json({
-    //   ok: true,
-    //   message: "your request to borrow this book is successful",
-    //   data: borrowedBook,
-    // });
+    res.status(200).json({
+      ok: true,
+      message: "your request to borrow this book is successful",
+      data: borrowedBook,
+    });
   } catch (error) {
     res.status(500).json({
       message: "An error occurred while borrowing the book",
@@ -55,6 +55,7 @@ export const borrowBook = async (req, res) => {
     });
   }
 };
+
 
 // GET ALL BOOKS
 export const getBooks = async (req, res) => {
@@ -98,20 +99,18 @@ export const getBooksById = async (req, res) => {
 // CREATE BOOK
 export const createBook = async (req, res) => {
   try {
-    const id = req.params.id;
     const { title, author, isbn } = req.body;
-    const newBook = { id, title, author, isbn, status: "AVAILABLE" };
-    books.push(newBook);
+    if (!title || !author || !isbn) {
+      return res.status(400).json({
+        ok: false,
+        message: "Missing Input!! Fill the field correctly",
+      });
+    }
+    const newBook = await BookModel.create(req.body);
+
     res
       .status(201)
       .json({ message: "Book created successfully", book: newBook });
-
-    book.status = "OUT";
-    book.borrowedBy = studentId;
-    book.issuedBy = librarianId;
-    book.returnDate = returnDate;
-
-    await book.save();
 
     res.status(200).json({ message: "Book created successfully", book });
   } catch (error) {
