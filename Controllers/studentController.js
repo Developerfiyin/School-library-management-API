@@ -1,3 +1,4 @@
+import express from "express";
 import Student from "../Models/studentModel";
 
 //CREATE STUDENT 

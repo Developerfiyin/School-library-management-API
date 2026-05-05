@@ -1,4 +1,7 @@
-const borrowBook = async (req, res) => {
+import express from "express";
+import BookModel from "../Models/booksModel.js";
+
+export const borrowBook = async (req, res) => {
   const { returnDate } = req.body;
   try {
     const bookData = {

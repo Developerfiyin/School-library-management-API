@@ -1,5 +1,4 @@
 import express from "express";
-import books from "../Models/booksModel.js";
 import BookModel from "../Models/booksModel.js";
 
 export const borrowBook = async (req, res) => {

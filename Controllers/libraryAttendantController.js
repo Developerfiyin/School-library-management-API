@@ -7,7 +7,7 @@ import Library from "../Models/libraryModel";
 export const createLibraryAttendant = async (req, res) => {
 
   try {
-    const libraryAttendant = await Library.create( req.body);
+    const libraryAttendant = await Library.create(req.body);
 
     res
       .status(201)
