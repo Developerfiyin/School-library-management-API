@@ -7,6 +7,13 @@ import Library from "../Models/libraryModel";
 export const createLibraryAttendant = async (req, res) => {
 
   try {
+    const { name, staffId } = req.body;
+    if (!name || !staffId) {
+      return res
+        .status(400)
+        .json({ ok: false, message: "Missing Input!! Fill the field correctly" });
+    }
+    
     const libraryAttendant = await Library.create(req.body);
 
     res

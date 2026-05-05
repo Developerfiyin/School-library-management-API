@@ -1,11 +1,14 @@
 import express from 'express'
 import Author from '../Models/authorModel'
-import Author from '../Models/authorModel'
 
 //CREATE AUTHOR
 export const createAuthor = async (req, res) => {
 
     try {
+        const {name, bio} = req.body;
+    if (!name || !bio) {
+        return res.status(400).json({ ok: false, message: "Missing Input!! Fill the field correctly" })
+    }
         const author = await Author.create(req.body)
         res.status(201).json({ ok: true , message: "Author has been created successfully", data: author })
     } catch (error) {
@@ -52,11 +55,7 @@ try {
     }
 
 } 
-catch (error) {
-    res.status(500).json({ ok: false, message: error.message });
-    console.log(error.message);
-    
-}
+
 
 
 //UPDATE AUTHOR BY ID
