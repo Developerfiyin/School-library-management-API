@@ -186,6 +186,18 @@ export const returnBook = async (req, res) => {
       });
     }
 
+      if (book.borrowedBy === studentId) {
+      return res.status(400).json({
+        message: "You didn't borrow the book!. hehehehe Please try again later",
+      });
+    }
+
+    if (book.issuedBy === librarianId) {
+      return res.status(400).json({
+        message: "The librarian didn't borrow the book!. hehehehe Please try again later",
+      });
+    }
+
     const bookData = {
       status: "IN",
       borrowedBy: null,
@@ -206,13 +218,15 @@ export const returnBook = async (req, res) => {
 
     res.status(200).json({
       ok: true,
-      message: "your request to borrow this book is successful",
+      message: "your request to return this book is successful",
       data: returnBook,
     });
   } catch (error) {
     res.status(500).json({
-      message: "An error occurred while borrowing the book",
+      message: "An error occurred while returning the book",
       error: error.message,
     });
   }
 };
+
+
