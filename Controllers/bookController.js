@@ -3,14 +3,12 @@ import BookModel from "../Models/booksModel.js";
 
 export const borrowBook = async (req, res) => {
   try {
-
-
     const { returnDate, studentId, librarianId } = req.body;
     if (!studentId) {
       return res.status(400).json({ message: "Student id required" });
     }
 
-    if (!returnDate) { 
+    if (!returnDate) {
       return res.status(400).json({ message: "return date required" });
     }
 
@@ -26,11 +24,9 @@ export const borrowBook = async (req, res) => {
     }
 
     if (book.status === "OUT") {
-      return res
-        .status(400)
-        .json({
-          message: "OOPSS!!, the book out  already!. Please try again later",
-        });
+      return res.status(400).json({
+        message: "OOPSS!!, the book out  already!. Please try again later",
+      });
     }
 
     // const bookData = {
@@ -52,33 +48,11 @@ export const borrowBook = async (req, res) => {
     //   message: "your request to borrow this book is successful",
     //   data: borrowedBook,
     // });
-
-
-    const createBook = async (req, res) => {
-      const id = req.params.id;
-      const { title, author, isbn } = req.body;
-      const newBook = { id, title, author, isbn, status: "AVAILABLE" };
-      books.push(newBook);
-      res
-        .status(201)
-        .json({ message: "Book created successfully", book: newBook });
-    };
-
-    book.status = "OUT";
-    book.borrowedBy = studentId;
-    book.issuedBy = librarianId;
-    book.returnDate = returnDate;
-
-    await book.save();
-
-    res.status(200).json({ message: "Book borrowed successfully", book });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "An error occurred while borrowing the book",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "An error occurred while borrowing the book",
+      error: error.message,
+    });
   }
 };
 
@@ -107,13 +81,11 @@ export const getBooksById = async (req, res) => {
   try {
     const book = await BookModel.findById(id);
     if (!book) {
-      return res
-        .status(400)
-        .json({
-          ok: false,
-          message: "Invalid Input!! Fill the field correctly",
-          data: null,
-        });
+      return res.status(400).json({
+        ok: false,
+        message: "Invalid Input!! Fill the field correctly",
+        data: null,
+      });
     }
     res
       .status(200)
@@ -123,52 +95,69 @@ export const getBooksById = async (req, res) => {
   }
 };
 
-//UPDATE BOOK BY ID
-
-export const updateBook = async (req, res) => {
-  const id = req.params.id;
-  const { title, author, isbn } = req.body;
+// CREATE BOOK
+export const createBook = async (req, res) => {
   try {
-    const updateBook = await BookModel.findByIdAndUpdate(
-      { _id: req.params.id },
-      { $set: req.body },
-      { new: true },
-    );
+    const id = req.params.id;
+    const { title, author, isbn } = req.body;
+    const newBook = { id, title, author, isbn, status: "AVAILABLE" };
+    books.push(newBook);
     res
-      .status(200)
-      .json({
+      .status(201)
+      .json({ message: "Book created successfully", book: newBook });
+
+    book.status = "OUT";
+    book.borrowedBy = studentId;
+    book.issuedBy = librarianId;
+    book.returnDate = returnDate;
+
+    await book.save();
+
+    res.status(200).json({ message: "Book created successfully", book });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: error.message });
+  }
+  //UPDATE BOOK BY ID
+
+  export const updateBook = async (req, res) => {
+    const id = req.params.id;
+    const { title, author, isbn } = req.body;
+    try {
+      const updateBook = await BookModel.findByIdAndUpdate(
+        { _id: req.params.id },
+        { $set: req.body },
+        { new: true },
+      );
+      res.status(200).json({
         ok: true,
         message: "Book updated successfully",
         data: updateBook,
       });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: error.message });
-  }
-};
+    } catch (error) {
+      res.status(500).json({ ok: false, error: error.message });
+    }
+  };
 
-//DELETE BOOK BY ID
+  //DELETE BOOK BY ID
 
-export const deleteBook = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const deleteBook = await BookModel.findByIdAndDelete(id);
-    if (!deleteBook) {
-      return res
-        .status(400)
-        .json({
+  export const deleteBook = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const deleteBook = await BookModel.findByIdAndDelete(id);
+      if (!deleteBook) {
+        return res.status(400).json({
           ok: false,
           message: "Invalid Input!! Fill the field correctly",
           data: null,
         });
-    }
-    res
-      .status(200)
-      .json({
+      }
+      res.status(200).json({
         ok: true,
         message: "Book deleted successfully",
         data: deleteBook,
       });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: error.message });
-  }
+    } catch (error) {
+      res.status(500).json({ ok: false, error: error.message });
+    }
+  };
 };
