@@ -60,6 +60,7 @@ export const getStudents = async (req, res) => {
 
 export const getStudentsById = async (req, res) => {
   const id = req.params.id;
+  
 
   try {
     const students = await Student.findById(id);

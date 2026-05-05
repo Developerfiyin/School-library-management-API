@@ -5,7 +5,6 @@ import Library from "../Models/libraryModel";
 //CREATE LIBRARY ATTENDANT
 
 export const createLibraryAttendant = async (req, res) => {
-
   try {
     const { name, staffId } = req.body;
     if (!name || !staffId) {
@@ -13,9 +12,8 @@ export const createLibraryAttendant = async (req, res) => {
         .status(400)
         .json({ ok: false, message: "Missing Input!! Fill the field correctly" });
     }
-    
-    const libraryAttendant = await Library.create(req.body);
 
+   const libraryAttendant = await Library.create(req.body);
     res
       .status(201)
       .json({
@@ -33,6 +31,7 @@ export const createLibraryAttendant = async (req, res) => {
 //GET ALL LIBRARY ATTENDANTS
 
 export const getLibraryAttendants = async (req, res) => {
+  
     try {
         const libraryAttendants = await Library.find().sort({ name: 1 })
         res.status(200).json({ ok: true, message: "Request successful", data: libraryAttendants })
