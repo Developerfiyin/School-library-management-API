@@ -47,13 +47,16 @@ export const updateAuthor = async (req, res) => {
         return res.status(400).json({ ok: false, message: "Missing Input!! Fill the field correctly" })
     }
     try {
-        const Author = await  Author.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true })
-        res.status(200).json({ ok: true, message: "Author updated successfully", data: Author })
+        const author = await  Author.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true })
+        res.status(200).json({ ok: true, message: "Author updated successfully", data: author })
 
         
     } catch (error) {
+        res.status(500).json({ok: false, message: "Error updating author."})
+        console.log(error.message);
         
     }
+    
 }
 
 // DELETE AUTHORS
