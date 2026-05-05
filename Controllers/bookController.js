@@ -17,7 +17,7 @@ export const borrowBook = async (req, res) => {
     }
 
     const bookId = req.params.id;
-    const book = await books.findById(bookId);
+    const book = await BookModel.findById(bookId);
 
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
@@ -159,4 +159,60 @@ export const createBook = async (req, res) => {
       res.status(500).json({ ok: false, error: error.message });
     }
   };
+};
+
+
+export const returnBook = async (req, res) => {
+  try {
+    const {  studentId, librarianId } = req.body;
+    if (!studentId) {
+      return res.status(400).json({ message: "Student id required" });
+    }
+
+    if (!librarianId) {
+      return res.status(400).json({ message: "Librarian id  required" });
+    }
+
+    const bookId = req.params.id;
+    const book = await BookModel.findById(bookId);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    if (book.status === "IN") {
+      return res.status(400).json({
+        message: "OOPSS!!, the book is already in!. Please try again later",
+      });
+    }
+
+    const bookData = {
+      status: "IN",
+      borrowedBy: null,
+      issuedBy: null,
+      returnDate: null,
+    };
+    const returnBook = await BookModel.findByIdAndUpdate(
+      bookId,
+      bookData,
+      { new: true }
+    );
+
+    await returnBook.populate([
+      { path: "authors", select: "name bio" },
+      { path: "borrowedBy", select: "name email" },
+      { path: "issuedBy", select: "name staffId" },
+    ]);
+
+    res.status(200).json({
+      ok: true,
+      message: "your request to borrow this book is successful",
+      data: returnBook,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "An error occurred while borrowing the book",
+      error: error.message,
+    });
+  }
 };
