@@ -16,7 +16,7 @@ export const createAuthor = async (req, res) => {
     }
 }
 
-//GET ALL AUTHORS
+//GET ALL AUTHORs
 
 export const getAuthors = async (req, res) => {
  try {
@@ -30,6 +30,7 @@ export const getAuthors = async (req, res) => {
 //GET AUTHOR BY ID
 export const getAuthorById = async (req, res) => {
     const id = req.params.id
+    
     try {
         const author = await Author.findById(id)
         if (!author) {
@@ -38,15 +39,17 @@ export const getAuthorById = async (req, res) => {
         res.status(200).json({ ok: true, message: "Request successful", data: author })
     } catch (error) {
         res.status(500).json({ ok: false, message: "Error fetching author" })
+        console.log(error.message);
+        
     }
 }
 
 //Update Author
 export const updateAuthor = async (req, res) => {
-
+ const author = req.author;
 try {
-        const author = req.author;
-        const {name, bio} = req.body;
+      //  const author = req.author;
+     //   const {name, bio} = req.body;
         await author.set({ name, bio }).save()
         res.status(200).json({ ok: true, message: "Author updated successfully", data: author })
     } catch (error) {
@@ -79,13 +82,14 @@ export const updateAuthorById = async (req, res) => {
     
 }
 
-// DELETE AUTHORS
+// DELETE AUTHOR BY ID
 
-export const deleteAuthors = async (req, res) => {
-    const author = req.author
+export const deleteAuthor = async (req, res) => {
+  //  const author = req.author
+  const id = req.params.id;
     
 try {
-    const deletedAuthor = await Author.deleteOne()
+    const deletedAuthor = await Author.deleteOne({ _id: id })
     res.status(200).json({ ok: true, message: "Author deleted successfully", data: deletedAuthor }) 
 
 } catch (error) {
