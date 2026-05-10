@@ -16,7 +16,7 @@ export const createAuthor = async (req, res) => {
     }
 }
 
-//GET ALL AUTHORs
+//GET ALL AUTHORS
 
 export const getAuthors = async (req, res) => {
  try {
@@ -48,8 +48,7 @@ export const getAuthorById = async (req, res) => {
 export const updateAuthor = async (req, res) => {
  const author = req.author;
 try {
-      //  const author = req.author;
-     //   const {name, bio} = req.body;
+    
         await author.set({ name, bio }).save()
         res.status(200).json({ ok: true, message: "Author updated successfully", data: author })
     } catch (error) {
