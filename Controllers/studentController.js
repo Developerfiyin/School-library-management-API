@@ -40,8 +40,7 @@ if (!name || typeof name !== "string" || !name.trim()) {
   }
 };
 
-//GET ALL STUDENTS
-
+//GET ALL STUDENT
 export const getStudents = async (req, res) => {
   try {
     const students = await Student.find().sort({ name: 1 });
@@ -57,7 +56,6 @@ export const getStudents = async (req, res) => {
 };
 
 //GET STUDENTS BY ID
-
 export const getStudentsById = async (req, res) => {
   const id = req.params.id;
   try {
