@@ -55,7 +55,7 @@ export const getStudents = async (req, res) => {
   }
 };
 
-//GET STUDENTS BY ID
+//GET STUDENT BY ID
 export const getStudentsById = async (req, res) => {
   const id = req.params.id;
   try {
